@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-12 pb-6">
@@ -14,9 +16,10 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:text-blue-400">Home</a></li>
             <li><a href="#" className="hover:text-blue-400">Shop</a></li>
+            <li><a href="#" className="hover:text-blue-400">Categories</a></li>
             <li><a href="#" className="hover:text-blue-400">About Us</a></li>
-            <li><a href="#" className="hover:text-blue-400">Blog</a></li>
             <li><a href="#" className="hover:text-blue-400">Contact</a></li>
           </ul>
         </div>

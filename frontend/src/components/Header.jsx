@@ -22,6 +22,7 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8 text-white font-medium">
+          <a href="#" className="hover:text-blue-600">Home</a>
           <a href="#" className="hover:text-blue-600">Shop</a>
           <a href="#" className="hover:text-blue-600">Categories</a>
           <a href="#" className="hover:text-blue-600">About</a>
