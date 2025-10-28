@@ -25,7 +25,7 @@ export default function Categories() {
               <img
                 src={cat.img}
                 alt={cat.name}
-                className="w-full h-48 object-cover"
+                className="w-full h-56 object-cover"
               />
               <h3 className="mt-3 text-lg font-semibold">{cat.name}</h3>
             </div>
