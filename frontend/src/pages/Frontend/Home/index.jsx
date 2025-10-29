@@ -3,6 +3,7 @@ import Hero from './Hero'
 import Categories from './Categories'
 import Trending from './Trending'
 import Banner from './Banner'
+import Testimonials from './Tesimonials'
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
     <Categories />
     <Trending />
     <Banner />
+    <Testimonials />
       
     </main>
   )

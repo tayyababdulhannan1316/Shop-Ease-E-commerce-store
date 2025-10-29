@@ -5,6 +5,7 @@ import Footer from "../components/Footer.jsx";
 function Routes() {
   return (
     <>
+    
       <Header />
       <Home />
       <Footer />
