@@ -1,6 +1,7 @@
 import react  from 'react'
 import Routes from './pages/Routes.jsx';
 import './index.css';
+import AppRouter from './routes/AppRouter.jsx';
 
 function App() {
 
@@ -8,7 +9,8 @@ function App() {
   return (
     <>
       
-      <Routes />
+      {/* <Routes /> */}
+      <AppRouter />
     </>
   )
 }
