@@ -29,7 +29,7 @@ function Hero() {
             type="primary"
             size="large"
             className="bg-blue-600 hover:bg-blue-700 text-white border-none"
-            onClick={() => navigate('/shop')} // 👈 navigate to Shop page
+            onClick={() => navigate('/shop')} 
           >
             Get Started
           </Button>
