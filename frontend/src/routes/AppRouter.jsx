@@ -10,6 +10,7 @@ import Shop from "../pages/Frontend/Shop";
 import Categories from "../pages/Frontend/Categories";
 import About from "../pages/Frontend/About";
 import Contact from "../pages/Frontend/Contact";
+import ProductDetail from "../pages/Frontend/ProductDetail";
 
 export default function AppRouter() {
   return (
@@ -22,7 +23,7 @@ export default function AppRouter() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {/* You can add more routes later */}
+          <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </main>
       <Footer />

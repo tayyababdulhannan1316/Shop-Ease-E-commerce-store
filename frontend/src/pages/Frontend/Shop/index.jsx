@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Input, Select } from "antd";
+import {Link} from "react-router-dom";
+
 import product1 from "../../../assets/images/casual shirt.jpg";
 import product2 from "../../../assets/images/summer dress.jpg";
 import product3 from "../../../assets/images/smart watch2.jpg";
@@ -64,11 +66,14 @@ const Shop = () => {
             key={item.id}
             className="bg-white rounded-2xl shadow hover:shadow-xl transition-transform hover:-translate-y-1 duration-300"
           >
-            <img
-              src={item.img}
-              alt={item.name}
-              className="w-full h-64 object-cover rounded-t-2xl"
-            />
+            <Link to={`/product/${item.id}`}>
+              <img
+                src={item.img}
+                alt={item.name}
+                className="w-full h-64 object-cover rounded-t-2xl hover:opacity-90 transition duration-300"
+              />
+            </Link>
+
             <div className="p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
               <p className="text-gray-500 mt-1">Rs {item.price}</p>
