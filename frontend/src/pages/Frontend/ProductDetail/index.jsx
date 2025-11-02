@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, Rate } from "antd";
+import { Button, Rate, message } from "antd";
+import { useCart } from "../../../contexts/CartContext";
+
+// Static product data (later replace with MongoDB)
 import product1 from "../../../assets/images/casual shirt.jpg";
 import product2 from "../../../assets/images/summer dress.jpg";
 import product3 from "../../../assets/images/smart watch2.jpg";
@@ -18,12 +21,15 @@ const products = [
   { id: 5, name: "Handbag", price: 3999, img: product5, desc: "Elegant handbag crafted with premium materials.", category: "Women" },
   { id: 6, name: "Headphones", price: 3499, img: product6, desc: "High-quality sound with noise cancellation feature.", category: "Electronics" },
   { id: 7, name: "Formal Shirt", price: 2799, img: product7, desc: "Stylish formal shirt for business and special occasions.", category: "Men" },
-  { id: 8, name: "Bluetooth Speaker", price: 1999, img: product8, desc: "Portable speaker with excellent sound quality and battery life.", category: "Electronics" }
+  { id: 8, name: "Bluetooth Speaker", price: 1999, img: product8, desc: "Portable speaker with excellent sound quality and battery life.", category: "Electronics" },
 ];
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart, cartItems } = useCart();
+  const [added, setAdded] = useState(false);
+
   const product = products.find((p) => p.id === parseInt(id));
 
   if (!product) {
@@ -36,6 +42,17 @@ function ProductDetail() {
       </div>
     );
   }
+
+  const handleAddToCart = () => {
+    const existing = cartItems.find((item) => item.id === product.id);
+    if (existing) {
+      message.info(`${product.name} quantity increased in cart.`);
+    } else {
+      message.success(`${product.name} added to cart!`);
+    }
+    addToCart(product);
+    setAdded(true);
+  };
 
   return (
     <div className="py-12 px-6 lg:px-20 bg-gray-50 min-h-screen">
@@ -57,13 +74,25 @@ function ProductDetail() {
           <p className="text-2xl font-semibold text-blue-600 mb-6">Rs {product.price}</p>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Button
-              type="primary"
-              size="large"
-              className="bg-blue-600 hover:bg-blue-700 border-none"
-            >
-              Add to Cart
-            </Button>
+            {!added ? (
+              <Button
+                type="primary"
+                size="large"
+                className="bg-blue-600 hover:bg-blue-700 border-none"
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </Button>
+            ) : (
+              <Button
+                type="default"
+                size="large"
+                className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                onClick={() => navigate("/cart")}
+              >
+                Go to Cart
+              </Button>
+            )}
             <Button
               size="large"
               className="border-blue-600 text-blue-600 hover:bg-blue-50"

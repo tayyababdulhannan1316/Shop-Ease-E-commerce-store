@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Button, Input, Select } from "antd";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useCart } from "../../../contexts/CartContext"; 
 
+// ✅ Import Product Images
 import product1 from "../../../assets/images/casual shirt.jpg";
 import product2 from "../../../assets/images/summer dress.jpg";
 import product3 from "../../../assets/images/smart watch2.jpg";
@@ -15,6 +17,8 @@ const { Option } = Select;
 
 const Shop = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const { addToCart } = useCart(); 
 
   const products = [
     { id: 1, name: "Casual Shirt", price: 2499, img: product1, category: "Men" },
@@ -27,12 +31,16 @@ const Shop = () => {
     { id: 8, name: "Bluetooth Speaker", price: 1999, img: product8, category: "Electronics" },
   ];
 
-  const filteredProducts = products.filter((p) =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // ✅ Filter products by category + search term
+  const filteredProducts = products.filter((p) => {
+    const matchesCategory =
+      selectedCategory === "All" || p.category === selectedCategory;
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <div className="py-12 px-6 lg:px-16 bg-gray-50">
+    <div className="py-12 px-6 lg:px-16 bg-gray-50 min-h-screen">
       {/* Page Title */}
       <h1 className="text-3xl font-bold text-center mb-10 text-gray-800">
         Explore Our Collection
@@ -50,7 +58,7 @@ const Shop = () => {
         <Select
           defaultValue="All"
           className="w-full sm:w-40"
-          onChange={(value) => console.log(value)}
+          onChange={(value) => setSelectedCategory(value)}
         >
           <Option value="All">All Categories</Option>
           <Option value="Men">Men</Option>
@@ -77,9 +85,11 @@ const Shop = () => {
             <div className="p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
               <p className="text-gray-500 mt-1">Rs {item.price}</p>
+
               <Button
                 type="primary"
                 className="bg-blue-600 hover:bg-blue-700 mt-3 text-white border-none"
+                onClick={() => addToCart(item)} 
               >
                 Add to Cart
               </Button>
@@ -87,6 +97,11 @@ const Shop = () => {
           </div>
         ))}
       </div>
+
+      {/* Empty State */}
+      {filteredProducts.length === 0 && (
+        <p className="text-center text-gray-500 mt-10">No products found.</p>
+      )}
     </div>
   );
 };
