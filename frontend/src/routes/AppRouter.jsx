@@ -14,6 +14,9 @@ import ProductDetail from "../pages/Frontend/ProductDetail";
 import Cart from "../pages/Frontend/Cart";
 import Checkout from "../pages/Frontend/Checkout";
 import OrderSuccess from "../pages/Frontend/OrderSuccess";
+import OrderHistory from "../pages/Frontend/OrderHistory";
+import MyAccount from "../pages/Frontend/MyAccount";
+
 
 export default function AppRouter() {
   return (
@@ -29,7 +32,9 @@ export default function AppRouter() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/ordersuccess" element={<OrderSuccess />} />
+          <Route path="/orderhistory" element={<OrderHistory />} />
+          <Route path="/myaccount" element={<MyAccount />} />
         </Routes>
       </main>
       <Footer />

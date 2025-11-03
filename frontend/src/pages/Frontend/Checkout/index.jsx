@@ -4,7 +4,7 @@ import { useCart } from "../../../contexts/CartContext";
 import { message } from "antd";
 
 export default function Checkout() {
-  const { cartItems, subtotal, clearCart } = useCart();
+  const { cartItems, subtotal, addOrder } = useCart();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -26,19 +26,12 @@ export default function Checkout() {
       return;
     }
 
-    // Save order summary temporarily
-  const orderData = {
-    id: Date.now(),
-    ...form,
-    subtotal,
-    cartItems,
-  };
-  localStorage.setItem("latestOrder", JSON.stringify(orderData));
+    // ✅ Save order using context (passing form, subtotal, cartItems)
+    addOrder(form, subtotal, cartItems);
 
-  message.success("Order placed successfully!");
-  clearCart(); // ✅ clear the cart after successful order
-  navigate("/order-success");
-};
+    message.success("Order placed successfully!");
+    navigate("/ordersuccess");
+  };
 
   if (cartItems.length === 0) {
     return (
