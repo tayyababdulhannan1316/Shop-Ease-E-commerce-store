@@ -4,7 +4,7 @@ import { useCart } from "../../../contexts/CartContext";
 import { message } from "antd";
 
 export default function Checkout() {
-  const { cartItems, subtotal } = useCart();
+  const { cartItems, subtotal, clearCart } = useCart();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -26,12 +26,19 @@ export default function Checkout() {
       return;
     }
 
-    // Future: send to MongoDB backend
-    console.log("Order placed:", { ...form, cartItems, subtotal });
-
-    message.success("Order placed successfully!");
-    navigate("/order-success");
+    // Save order summary temporarily
+  const orderData = {
+    id: Date.now(),
+    ...form,
+    subtotal,
+    cartItems,
   };
+  localStorage.setItem("latestOrder", JSON.stringify(orderData));
+
+  message.success("Order placed successfully!");
+  clearCart(); // ✅ clear the cart after successful order
+  navigate("/order-success");
+};
 
   if (cartItems.length === 0) {
     return (

@@ -12,7 +12,7 @@ import About from "../pages/Frontend/About";
 import Contact from "../pages/Frontend/Contact";
 import ProductDetail from "../pages/Frontend/ProductDetail";
 import Cart from "../pages/Frontend/Cart";
-import Checkout from "../pages/Frontend/Chechout";
+import Checkout from "../pages/Frontend/Checkout";
 import OrderSuccess from "../pages/Frontend/OrderSuccess";
 
 export default function AppRouter() {

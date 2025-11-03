@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Add item to cart
+  // ✅ Add item to cart
   const addToCart = (product) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -31,12 +31,12 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Remove item
+  // ✅ Remove item from cart
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Update quantity
+  // ✅ Update quantity
   const updateQuantity = (id, type) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -55,6 +55,13 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // ✅ Clear entire cart (used after successful checkout)
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cartItems"); // optional: clears storage too
+  };
+
+  // ✅ Calculations
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -68,6 +75,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         updateQuantity,
+        clearCart, // ✅ added here
         totalItems,
         subtotal,
       }}
